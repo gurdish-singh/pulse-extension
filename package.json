@@ -1,0 +1,120 @@
+{
+  "name": "pulse-time-tracker",
+  "displayName": "Pulse — Time Tracker",
+  "description": "Automatic, detailed coding time tracking with idle detection and a beautiful dashboard of languages, files, projects, branches and sessions.",
+  "version": "1.0.0",
+  "publisher": "gurdish-singh",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gurdish-singh/pulse-extension.git"
+  },
+  "homepage": "https://github.com/gurdish-singh/pulse-extension#readme",
+  "bugs": {
+    "url": "https://github.com/gurdish-singh/pulse-extension/issues"
+  },
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "keywords": [
+    "time tracker",
+    "productivity",
+    "dashboard",
+    "analytics"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "pulse.openDashboard",
+        "title": "Open Dashboard",
+        "category": "Pulse",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "pulse.togglePause",
+        "title": "Pause / Resume Tracking",
+        "category": "Pulse"
+      },
+      {
+        "command": "pulse.showToday",
+        "title": "Show Today's Summary",
+        "category": "Pulse"
+      },
+      {
+        "command": "pulse.exportJson",
+        "title": "Export Data (JSON)",
+        "category": "Pulse"
+      },
+      {
+        "command": "pulse.exportCsv",
+        "title": "Export Files Report (CSV)",
+        "category": "Pulse"
+      },
+      {
+        "command": "pulse.openDataFolder",
+        "title": "Open Data Folder",
+        "category": "Pulse"
+      },
+      {
+        "command": "pulse.deleteAllData",
+        "title": "Delete All Tracked Data",
+        "category": "Pulse"
+      }
+    ],
+    "configuration": {
+      "title": "Pulse Time Tracker",
+      "properties": {
+        "pulse.idleTimeoutMinutes": {
+          "type": "number",
+          "default": 20,
+          "minimum": 1,
+          "maximum": 240,
+          "description": "Stop counting time after this many minutes without any activity. Idle time is never counted; tracking resumes automatically on the next keystroke."
+        },
+        "pulse.trackWhenUnfocused": {
+          "type": "boolean",
+          "default": false,
+          "description": "Keep counting time while the VS Code window is not focused (e.g. reading docs in a browser). Idle timeout still applies."
+        },
+        "pulse.dailyGoalHours": {
+          "type": "number",
+          "default": 4,
+          "minimum": 0,
+          "description": "Daily coding goal in hours, shown in the status bar tooltip and dashboard."
+        },
+        "pulse.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show today's tracked time in the status bar."
+        },
+        "pulse.excludePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "**/node_modules/**",
+            "**/.git/**"
+          ],
+          "description": "Glob patterns for files that should not be tracked."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.9.2",
+    "remixicon": "^4.9.1"
+  }
+}
